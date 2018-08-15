@@ -19,6 +19,11 @@ include_directories(${CLAPACK_SOURCE_DIR}/INCLUDE)
 add_subdirectory(F2CLIBS)
 add_subdirectory(BLAS)
 add_subdirectory(SRC)
+# There is no install tree, copy the INCLUDE folder into the build tree.
+file(COPY ${CLAPACK_SOURCE_DIR}/INCLUDE DESTINATION ${CLAPACK_BINARY_DIR})
+# Used in clapack-config.cmake.in
+set(CONF_INCLUDE_DIRS ${CLAPACK_BINARY_DIR}/INCLUDE)
+
 if( BUILD_TESTING )
   enable_testing()
   include(CTest)
